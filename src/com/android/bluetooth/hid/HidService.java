@@ -429,6 +429,11 @@ public class HidService extends ProfileService {
         enforceCallingOrSelfPermission(BLUETOOTH_PERM, "Need BLUETOOTH permission");
         List<BluetoothDevice> inputDevices = new ArrayList<BluetoothDevice>();
 
+        if (mInputDevices == null) {
+            Log.w(TAG, "mInputDevices is null");
+            return inputDevices;
+        }
+
         for (BluetoothDevice device: mInputDevices.keySet()) {
             int inputDeviceState = getConnectionState(device);
             for (int state : states) {
