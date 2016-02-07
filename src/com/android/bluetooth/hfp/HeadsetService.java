@@ -347,6 +347,11 @@ public class HeadsetService extends ProfileService {
 
     public List<BluetoothDevice> getConnectedDevices() {
         enforceCallingOrSelfPermission(BLUETOOTH_PERM, "Need BLUETOOTH permission");
+        if (mStateMachine == null) {
+            Log.w(TAG,"mStateMachine is null");
+            return new ArrayList<BluetoothDevice>(0);
+        }
+
         return mStateMachine.getConnectedDevices();
     }
 
